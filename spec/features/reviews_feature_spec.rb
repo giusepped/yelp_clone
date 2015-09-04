@@ -55,4 +55,9 @@ feature 'reviewing' do
     expect(page).to have_content('Average rating: ★★★★☆')
   end
 
+  scenario 'should display N/A if there are no ratings' do
+    visit '/restaurants'
+    expect(page).to have_content('Average rating: N/A')
+  end
+
 end
