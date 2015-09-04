@@ -14,21 +14,4 @@ class Restaurant < ActiveRecord::Base
     self.reviews.average(:rating).to_i
   end
 
-  def star_rating
-    return average_rating unless average_rating.is_a? Integer
-    return black_stars + white_stars
-  end
-
-  def black_stars
-    black_stars = ''
-    average_rating.to_i.times { black_stars += '★' }
-    black_stars
-  end
-
-  def white_stars
-    white_stars = ''
-    (5 - average_rating.to_i).times { white_stars += '☆' }
-    white_stars
-  end
-
 end
