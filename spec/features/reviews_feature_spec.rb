@@ -70,8 +70,19 @@ feature 'reviewing' do
   scenario 'displays an average rating for all reviews' do
     user = build(:user)
     sign_up(user)
-    leave_review('So so', '5')
+    leave_review('Great', '5')
     expect(page).to have_content('Average rating: ★★★★★')
+  end
+
+  scenario 'displays an average rating for all reviews' do
+    user = build(:user)
+    sign_up(user)
+    leave_review('So so', '3')
+    click_link 'Sign out'
+    user2 = build(:user2)
+    sign_up(user2)
+    leave_review('Good', '4')
+    expect(page).to have_content('Average rating: ★★★★☆')
   end
 
 end

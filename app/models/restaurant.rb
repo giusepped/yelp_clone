@@ -1,4 +1,8 @@
 class Restaurant < ActiveRecord::Base
+
+  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/default.png"
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
   has_many :reviews, dependent: :destroy
 
   belongs_to :user
@@ -11,7 +15,7 @@ class Restaurant < ActiveRecord::Base
 
   def average_rating
     return 'N/A' if self.reviews.none?
-    self.reviews.average(:rating).to_i
+    self.reviews.average(:rating).round
   end
 
 end

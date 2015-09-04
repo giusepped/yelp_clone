@@ -114,5 +114,30 @@ feature 'restaurants' do
     end
   end
 
+  scenario 'I can add an image to a restaurant when creating a restaurant' do
+    user = build(:user)
+    visit '/'
+    sign_up(user)
+    click_link 'Add a restaurant'
+    fill_in 'Name', with: 'KFC'
+    attach_file "restaurant[image]", "spec/asset_specs/images/image.png"
+    click_button 'Create Restaurant'
+    expect(page).to have_selector("img")
+  end
+
+  scenario 'I can add an image to a restaurant when creating a restaurant' do
+    user = build(:user)
+    visit '/'
+    sign_up(user)
+    click_link 'Add a restaurant'
+    fill_in 'Name', with: 'KFC'
+    attach_file "restaurant[image]", "spec/asset_specs/images/image.png"
+    click_button 'Create Restaurant'
+    click_link 'Edit KFC'
+    attach_file "restaurant[image]", "spec/asset_specs/images/image.png"
+    click_button 'Update Restaurant'
+    expect(page).to have_selector("img")
+  end
+
 
 end

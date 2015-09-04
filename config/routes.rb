@@ -35,8 +35,10 @@ Rails.application.routes.draw do
   #     resource :seller
   #   end
 
-  resources :restaurants do
-    resources :reviews
+  resources :restaurants, shallow: true do
+    resources :reviews do
+      resources :endorsements
+    end
   end
 
   resources :users do
