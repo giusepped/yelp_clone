@@ -1,6 +1,7 @@
 - if @restaurants.any?
   - @restaurants.each do |restaurant|
     = link_to restaurant.name, restaurant_path(restaurant)
+    %h3 Average rating: #{restaurant.black_stars}#{restaurant.white_stars}
     = link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant)
     = link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete
     = link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)
@@ -10,6 +11,8 @@
           = review.thoughts
           %strong= review.rating
           \/5
+          - if current_user && current_user.id == review.user_id
+            = link_to "Delete review", restaurant_review_path(restaurant, review), method: :delete
 - else
   %h1 No restaurants yet!
 
